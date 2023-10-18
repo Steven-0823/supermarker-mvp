@@ -23,7 +23,7 @@ namespace Supermarket_mvp1.Presenters
 
         private void ShowPayModeView(object? sender, EventArgs e)
         {
-            IPayModeView view = PayModeView.GetInstance();
+            IPayModeView view = PayModeView.GetInstance((MainView)mainView);
 
             if (view == null)
             {
