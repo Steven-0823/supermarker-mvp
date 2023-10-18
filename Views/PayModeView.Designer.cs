@@ -277,6 +277,7 @@
             TxtPayModeId.Name = "TxtPayModeId";
             TxtPayModeId.Size = new Size(177, 23);
             TxtPayModeId.TabIndex = 1;
+            TxtPayModeId.TextAlign = HorizontalAlignment.Right;
             // 
             // LbPayModeId
             // 
