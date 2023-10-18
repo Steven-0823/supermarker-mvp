@@ -71,14 +71,8 @@ namespace Supermarket_mvp1._Repositories
                 command.CommandText = @"SELECT * FROM PayMode WHERE Pay_Mode_Id=@id AND Pay_Mode_Name LIKE @name+ ORDER BY Pay_Mode_Id DESC";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = payModeId;
                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = payModeName;
-
                 using (var reader = command.ExecuteReader())
                 {
-                    if (reader == null)
-                    {
-                        throw new Exception("El objeto lector es nulo.");
-                    }
-
                     while (reader.Read())
                     {
                         var payModeModel = new PayModeModel();
@@ -92,7 +86,6 @@ namespace Supermarket_mvp1._Repositories
 
             return payModeList;
         }
-
 
 
 
