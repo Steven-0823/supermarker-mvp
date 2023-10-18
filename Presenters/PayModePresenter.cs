@@ -39,7 +39,7 @@ namespace Supermarket_mvp1.Presenters
         {
 
             payModeList = repository.GetAll();
-            payModeBindingSource.DataSource = payModeList;//otro error
+            payModeBindingSource.DataSource = payModeList;
         }
 
         private void CancelAction(object? sender, EventArgs e)

@@ -91,29 +91,22 @@ namespace Supermarket_mvp1.Views
         }
         private static PayModeView instance;
 
-        public static PayModeView GetInstance()
-        {
+        public static PayModeView GetInstance() {
             if (instance == null || instance.IsDisposed)
             {
-                // La ventana no existe o ha sido eliminada.
-                // Crea una nueva instancia de la ventana.
                 instance = new PayModeView();
             }
+
             else
             {
-                // La ventana existe.
-                // Restaura la ventana a su estado normal si está minimizada.
                 if (instance.WindowState == FormWindowState.Minimized)
                 {
                     instance.WindowState = FormWindowState.Normal;
                 }
-
                 instance.BringToFront();
             }
-
             return instance;
         }
-
 
         private void LblSearch_Click(object sender, EventArgs e)
         {
@@ -123,7 +116,7 @@ namespace Supermarket_mvp1.Views
         private void LblPayModeName_Click(object sender, EventArgs e)
         {
 
-        } 
+        }
     }
 
 }
