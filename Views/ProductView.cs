@@ -16,5 +16,10 @@ namespace Supermarket_mvp1.Views
         {
             InitializeComponent();
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
