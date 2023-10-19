@@ -115,6 +115,7 @@
             tabPagePayModeList.TabIndex = 0;
             tabPagePayModeList.Text = " Pay Mode List ";
             tabPagePayModeList.UseVisualStyleBackColor = true;
+            tabPagePayModeList.Click += tabPagePayModeList_Click;
             // 
             // BtnClose
             // 

@@ -13,6 +13,6 @@ namespace Supermarket_mvp1.Models
         void delete(ProductModel productModel);
 
         IEnumerable<ProductModel> GetAll();
-        IEnumerable<ProductModel> GetByValvue(string value);
+        IEnumerable<ProductModel> GetByValue(string value);
     }
 }

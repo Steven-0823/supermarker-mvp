@@ -187,6 +187,11 @@ namespace Supermarket_mvp1.Views
         {
 
         }
+
+        private void tabPagePayModeList_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
