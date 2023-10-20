@@ -5,28 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Supermarket_mvp1.Presenters.Common
+namespace Supermarket_mvp.Presenters.Common
 {
     internal class ModelDataValidation
     {
-        public void validate(object model)
+        public void Validate(object model)
         {
-            string errorMenssage = "";
+            string errorMessage = "";
             List<ValidationResult> validationResults = new List<ValidationResult>();
             ValidationContext validationContext = new ValidationContext(model);
-            bool isValid = Validator.TryValidateObject(model,validationContext, validationResults, true);
-            if (isValid==false) 
-            { 
-            foreach (var item in validationResults)
+            bool isValid = Validator.TryValidateObject(
+                model, validationContext, validationResults, true);
+            if (isValid == false)
+            {
+                foreach (var item in validationResults)
                 {
-                    errorMenssage += item.ErrorMessage+ "\n";
-
+                    errorMessage += item.ErrorMessage + "\n";
                 }
-            throw new Exception(errorMenssage);
+                throw new Exception(errorMessage);
             }
-
-
         }
-
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Supermarket_mvp1.Views;
 using Supermarket_mvp1.Models;
 
+
 namespace Supermarket_mvp1.Presenters
 {
     internal class ProductPresenter
@@ -45,27 +46,84 @@ namespace Supermarket_mvp1.Presenters
 
         private void SaveProduct(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var product = new ProductModel();
+            product.id = Convert.ToInt32(view.ProductModeId);
+            product.name = view.ProductModeName;
+            product.categority = view.ProductModecategority;
+            product.id = int.Parse(view.ProductModeId);
+            try
+            {
+                new Common.ModelDataValidation().validate(product);
+                if (view.IsEdit)
+                {
+                    repository.Edit(product);
+                    view.Message = "Product edited successfuly";
+                }
+                else
+                {
+                    repository.add(product);
+                    view.Message = "Product added successfuly";
+                }
+                view.IsSuccessful = true;
+                loadAllProductList();
+                CleanViewFields();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccessful = false;
+                view.Message = ex.Message;
+            }
+        }
+
+        private void CleanViewFields()
+        {
+            view.ProductModeId = "0";
+            view.ProductModeName = "";
+            view.ProductModecategority = "";
+           
+
         }
 
         private void CancelAction(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            CleanViewFields();
         }
 
         private void DeleteSelectedProduct(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                
+                view.IsSuccessful = true;
+                view.Message = "Product deleted successfully";
+                loadAllProductList();
+            }
+            catch
+            (Exception ex)
+            {
+                view.IsSuccessful = false;
+                view.Message = "An error ocurred, could not delete pay mode";
+            }
         }
 
         private void LoadSelectProductToEdit(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var Product = (ProductModel)productBindingSource.Current;
+
+
+            view.ProductModeId = Product.id.ToString();
+            view.ProductModeName = Product.name;
+            view.ProductModecategority = Product.categority;
+            view.ProductModePrecio = Product.precio;
+            view.ProductModestock = Product.stock;
+
+
+            view.IsEdit = true;
         }
 
         private void AddNewProduct(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            view.IsEdit = false;
         }
 
         private void SearchProduct(object? sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supermarket_mvp.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -144,12 +145,16 @@ namespace Supermarket_mvp1.Views
 
         }
 
+        public bool IsSuccesful { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public event EventHandler SearchEvent;
         public event EventHandler AddNewEvent;
         public event EventHandler EditEvent;
         public event EventHandler DeletEvent;
         public event EventHandler SaveEvent;
         public event EventHandler CancelEvent;
+        public event EventHandler DeleteEvent;
+
         public void SetPayModeListBildingSource(BindingSource PaymodeList)
         {
             DgPayMode.DataSource = PaymodeList;
@@ -189,6 +194,11 @@ namespace Supermarket_mvp1.Views
         }
 
         private void tabPagePayModeList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtPayModeObservation_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -244,6 +244,7 @@
             TxtPayModeObservation.PlaceholderText = "Pay Mode Observation";
             TxtPayModeObservation.Size = new Size(201, 60);
             TxtPayModeObservation.TabIndex = 5;
+            TxtPayModeObservation.TextChanged += TxtPayModeObservation_TextChanged;
             // 
             // LblPayModeObservation
             // 

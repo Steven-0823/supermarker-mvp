@@ -12,25 +12,106 @@ namespace Supermarket_mvp1.Views
 {
     public partial class ProductView : Form, IProductView
     {
+        private bool isEdit;
+        private bool isSuccessful;
+        private string message;
         public ProductView()
         {
 
             InitializeComponent();
             AssociateAndRaiseViewEvents();
             tabControl1.TabPages.Remove(tabPageProductDetail);
+
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvents()
         {
-            BtnSearchP.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
+            BtnSearchP.Click += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+                TxtSearchP.KeyDown += (s, e) =>
+                {
+                    if (e.KeyCode == Keys.Enter)
+                    {
+                        SearchEvent?.Invoke(this, EventArgs.Empty);
+                    }
+                };
+            };
 
-            TxtSearchP.KeyDown += (s, e) =>
-                 {
-                     if (e.KeyCode == Keys.Enter)
-                     {
-                         SearchEvent?.Invoke(this, EventArgs.Empty);
-                     }
-                 };
+
+
+            BtnNew.Click += delegate
+            {
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageProductList);
+                tabControl1.TabPages.Add(tabPageProductDetail);
+                tabPageProductDetail.Text = "Add New Pay Mode";
+
+            };
+
+
+
+            BtnEdit.Click += delegate
+            {
+                EditEvent?.Invoke(this, EventArgs.Empty);
+
+                EditEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageProductList);
+                tabControl1.TabPages.Add(tabPageProductDetail);
+                tabPageProductDetail.Text = "Add Product";
+            };
+
+
+
+            BtnDelete.Click += delegate
+            {
+                DeletEvent?.Invoke(this, EventArgs.Empty);
+
+                DeletEvent?.Invoke(this, EventArgs.Empty);
+                var result = MessageBox.Show("Are you sure you want to delete the selected Pay Mode", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    DeletEvent?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(Message);
+                }
+
+
+            };
+
+
+
+            BtnSave.Click += delegate
+            {
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+                if (IsSuccessful)
+                {
+                    tabControl1.TabPages.Remove(tabPageProductDetail);
+                    tabControl1.TabPages.Add(tabPageProductList);
+
+                }
+                MessageBox.Show(Message);
+            };
+
+
+
+
+            BtnCancel.Click += delegate
+            {
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageProductDetail);
+                tabControl1.TabPages.Add(tabPageProductList);
+
+            };
         }
 
         public string ProductModeId
@@ -78,18 +159,21 @@ namespace Supermarket_mvp1.Views
         }
         public bool IsEdit
         {
-            get { return IsEdit; }
-            set { IsEdit = value; }
+            get { return isEdit; }
+            set { isEdit = value; }
         }
+
         public bool IsSuccessful
         {
-            get { return IsSuccessful; }
-            set { IsSuccessful = value; }
+            get { return isSuccessful; }
+            set { isSuccessful = value; }
         }
+
         public string Message
         {
-            get { return Message; }
-            set { Message = value; }
+            get { return message; }
+            set { message = value; }
+
         }
 
         public event EventHandler SearchEvent;
@@ -113,11 +197,16 @@ namespace Supermarket_mvp1.Views
 
         private static ProductView instance;
 
-        public static ProductView GetInstance()
+        public static ProductView GetInstance(Form parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {
                 instance = new ProductView();
+                instance.MdiParent = parentContainer;
+
+
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.Dock = DockStyle.Fill;
             }
             else
             {

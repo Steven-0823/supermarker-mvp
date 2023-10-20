@@ -1,4 +1,8 @@
-﻿using Supermarket_mvp1._Repositories;
+﻿using Supermarket_mvp._Repositories;
+using Supermarket_mvp.Models;
+using Supermarket_mvp.Presenters;
+using Supermarket_mvp.Views;
+using Supermarket_mvp1._Repositories;
 using Supermarket_mvp1.Models;
 using Supermarket_mvp1.Views;
 using System;
@@ -25,7 +29,7 @@ namespace Supermarket_mvp1.Presenters
         private void ShowProductView(object? sender, EventArgs e)
         {
 
-            IProductView view = ProductView.GetInstance();
+            IProductView view = ProductView.GetInstance((MainView)mainView);
 
             if (view == null)
             {
