@@ -53,7 +53,7 @@ namespace Supermarket_mvp1.Presenters
             product.id = int.Parse(view.ProductModeId);
             try
             {
-                new Common.ModelDataValidation().validate(product);
+                new Supermarket_mvp.Presenters.Common.ModelDataValidation().Validate(product);
                 if (view.IsEdit)
                 {
                     repository.Edit(product);
