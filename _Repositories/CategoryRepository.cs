@@ -21,17 +21,46 @@ namespace Supermarket_mvp1._Repositories
         }
         public void Add(CategoryModel categoryModel)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "INSERT INTO Category VALUES (@observation)";
+                command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = categoryModel.observation;
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "DELETE FROM Category WHERE category_Id = @id";
+                command.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Edit(CategoryModel categoryModel)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = @"UPDATE Category
+                                        SET 
+                                        category_Observation = @observation
+                                        WHERE category_Id = @id";
+                
+                command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = categoryModel.observation;
+                command.Parameters.Add("@id", SqlDbType.Int).Value = categoryModel.Id;
+                command.ExecuteNonQuery();
+            }
         }
 
         public IEnumerable<CategoryModel> GetAll()

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Supermarket_mvp1.Views;
 using Supermarket_mvp1.Models;
 
+
+
 namespace Supermarket_mvp1.Presenters
 {
     internal class CategoryPresenter
@@ -23,11 +25,11 @@ namespace Supermarket_mvp1.Presenters
             this.view = view;
             this.repository = repository;
 
-            this.view.SearchEvent += SearchProduct;
-            this.view.AddNewEvent += AddNewProduct;
-            this.view.EditEvent += LoadSelectProductToEdit;
-            this.view.DeleteEvent += DeleteSelectedProduct;
-            this.view.SaveEvent += SaveProduct;
+            this.view.SearchEvent += SearchCategory;
+            this.view.AddNewEvent += AddNewCategoryt;
+            this.view.EditEvent += LoadSelectCategoryToEdit;
+            this.view.DeleteEvent += DeleteSelectedCategory;
+            this.view.SaveEvent += SavePCategory;
             this.view.CancelEvent += CancelAction;
 
             this.view.SetCategoryListBildingSource(categoryBindingSource);
@@ -38,38 +40,89 @@ namespace Supermarket_mvp1.Presenters
 
         }
 
+        private void CancelAction(object? sender, EventArgs e)
+        {
+            CleanViewFields();
+        }
+
+        private void SavePCategory(object? sender, EventArgs e)
+        {
+            var categoryMode = new CategoryModel();
+            categoryMode.Id = Convert.ToInt32(view.CategoryId);
+
+            categoryMode.observation = view.CategoryObservation;
+
+            try
+            {
+                new Supermarket_mvp.Presenters.Common.ModelDataValidation().Validate(categoryMode);
+                if (view.IsEdit)
+                {
+                    repository.Edit(categoryMode);
+                    view.Message = "Category edited successfuly";
+                }
+                else
+                {
+                    repository.Add(categoryMode);
+                    view.Message = "PayMode added successfuly";
+                }
+                view.IsSuccesful = true;
+                loadAllCategoryList();
+                CleanViewFields();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccesful = false;
+                view.Message = ex.Message;
+            }
+        }
+
+        private void CleanViewFields()
+        {
+            view.CategoryId = "0";
+            view.CategoryObservation = "";
+        }
+
+        private void DeleteSelectedCategory(object? sender, EventArgs e)
+        {
+            try
+            {
+                var categoryMode = (CategoryModel)categoryBindingSource.Current;
+
+                repository.Delete(categoryMode.Id);
+                view.IsSuccesful = true;
+                view.Message = "Pay Mode deleted successfully";
+                loadAllCategoryList();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccesful = false;
+                view.Message = "An error ocurred, could ot delete category mode";
+            }
+        }
+
+        private void LoadSelectCategoryToEdit(object? sender, EventArgs e)
+        {
+            var categoryMode = (CategoryModel)categoryBindingSource.Current;
+
+            view.CategoryId = categoryMode.Id.ToString();
+            view.CategoryObservation = categoryMode.observation;
+
+            view.IsEdit = true;
+        }
+
+        private void AddNewCategoryt(object? sender, EventArgs e)
+        {
+            view.IsEdit = false;
+        }
+
         private void loadAllCategoryList()
         {
             categorytList = repository.GetAll();
             categoryBindingSource.DataSource = categorytList;
         }
 
-        private void CancelAction(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SaveProduct(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void DeleteSelectedProduct(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void LoadSelectProductToEdit(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void AddNewProduct(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SearchProduct(object? sender, EventArgs e)
+        
+        private void SearchCategory(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(this.view.SearchValue);
             if (emptyValue == false)

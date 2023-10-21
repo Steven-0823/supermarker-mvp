@@ -233,8 +233,11 @@
             // 
             TxtCategoryId.Location = new Point(8, 30);
             TxtCategoryId.Name = "TxtCategoryId";
+            TxtCategoryId.ReadOnly = true;
             TxtCategoryId.Size = new Size(210, 23);
             TxtCategoryId.TabIndex = 3;
+            TxtCategoryId.Text = "0";
+            TxtCategoryId.TextAlign = HorizontalAlignment.Right;
             // 
             // BtnCancel
             // 
