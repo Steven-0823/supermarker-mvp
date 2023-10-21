@@ -119,6 +119,7 @@
             // 
             // BtnDelete
             // 
+            BtnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BtnDelete.Image = Properties.Resources.delete;
             BtnDelete.Location = new Point(601, 168);
             BtnDelete.Name = "BtnDelete";
@@ -128,6 +129,7 @@
             // 
             // BtnClose
             // 
+            BtnClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BtnClose.Image = Properties.Resources.cerrar;
             BtnClose.Location = new Point(601, 238);
             BtnClose.Name = "BtnClose";
@@ -137,6 +139,7 @@
             // 
             // BtnEdit
             // 
+            BtnEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BtnEdit.Image = Properties.Resources.edit;
             BtnEdit.Location = new Point(601, 87);
             BtnEdit.Name = "BtnEdit";
@@ -146,6 +149,7 @@
             // 
             // BtnNew
             // 
+            BtnNew.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BtnNew.Image = Properties.Resources._new;
             BtnNew.Location = new Point(601, 6);
             BtnNew.Name = "BtnNew";
@@ -166,6 +170,7 @@
             // 
             // BtnSearch
             // 
+            BtnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BtnSearch.Image = Properties.Resources.search_small;
             BtnSearch.Location = new Point(495, 6);
             BtnSearch.Name = "BtnSearch";
@@ -229,8 +234,11 @@
             // 
             TxtProvidersId.Location = new Point(22, 31);
             TxtProvidersId.Name = "TxtProvidersId";
+            TxtProvidersId.ReadOnly = true;
             TxtProvidersId.Size = new Size(266, 23);
             TxtProvidersId.TabIndex = 5;
+            TxtProvidersId.Text = "0";
+            TxtProvidersId.TextChanged += TxtProvidersId_TextChanged;
             // 
             // label5
             // 

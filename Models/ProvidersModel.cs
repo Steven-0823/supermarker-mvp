@@ -14,14 +14,14 @@ namespace Supermarket_mvp1.Models
         public int Id { get; set; }
 
         [DisplayName("Providers Name")]
-        [Required(ErrorMessage = "Pay mode name is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Pay mode name must be " +
+        [Required(ErrorMessage = "Providers name is required")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Providers name must be " +
             "between 3 and 50 characters")]
         public string Name { get; set; }
 
         [DisplayName("Observation")]
         [Required(ErrorMessage = "Providers observation is required")]
-        [StringLength(200, MinimumLength = 3, ErrorMessage = "Pay mode observation must" +
+        [StringLength(200, MinimumLength = 3, ErrorMessage = "Providers observation must" +
             " be between 3 and 200 characters")]
         public string Observation { get; set; }
     }

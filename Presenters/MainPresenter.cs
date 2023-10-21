@@ -27,7 +27,7 @@ namespace Supermarket_mvp1.Presenters
             this.mainView.ShowProductView += ShowProductView;
 
             this.mainView.ShowCategoryView += ShowCategoryView;
-            this.mainView.ShowCategoryView += ShowProvidersView;
+            this.mainView.ShowProvidersView += ShowProvidersView;
 
 
 
@@ -36,7 +36,7 @@ namespace Supermarket_mvp1.Presenters
 
         private void ShowProvidersView(object? sender, EventArgs e)
         {
-            IProvidersView view = ProvidersView.GetInstance();
+            IProvidersView view = ProvidersView.GetInstance((MainView)mainView);
 
             IProvidersRepository repository = new ProvidersRepository(sqlConnectionString);
             new ProvidersPresenter(view, repository);

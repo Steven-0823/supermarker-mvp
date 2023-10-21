@@ -21,6 +21,7 @@ namespace Supermarket_mvp1.Views
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPageProvidersDetail);
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -33,6 +34,68 @@ namespace Supermarket_mvp1.Views
                     SearchEvent?.Invoke(this, EventArgs.Empty);
                 }
             };
+
+            BtnNew.Click += delegate
+            {
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageProvidersList);
+                tabControl1.TabPages.Add(tabPageProvidersDetail);
+                tabPageProvidersDetail.Text = "Add New Providers";
+
+            };
+
+
+
+
+            BtnEdit.Click += delegate
+            {
+                EditEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageProvidersList);
+                tabControl1.TabPages.Add(tabPageProvidersDetail);
+                tabPageProvidersDetail.Text = "Add Providers";
+
+
+            };
+
+            BtnSave.Click += delegate
+            {
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+                if (isSuccessful)
+                {
+                    tabControl1.TabPages.Remove(tabPageProvidersDetail);
+                    tabControl1.TabPages.Add(tabPageProvidersList);
+
+                }
+                MessageBox.Show(Message);
+
+            };
+
+            BtnDelete.Click += delegate
+            {
+                DeleteEvent?.Invoke(this, EventArgs.Empty);
+                var result = MessageBox.Show("Are you sure you want to delete the selected Providers", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    DeleteEvent?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(Message);
+                }
+
+
+            };
+
+
+            BtnCancel.Click += delegate
+            {
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageProvidersDetail);
+                tabControl1.TabPages.Add(tabPageProvidersList);
+
+            };
+
         }
 
         public string ProvidersId
@@ -83,15 +146,18 @@ namespace Supermarket_mvp1.Views
         {
             DgProviders.DataSource = providersList;
         }
-        private static  ProvidersView instance;
+        private static ProvidersView instance;
 
-        public static ProvidersView GetInstance()
+        public static ProvidersView GetInstance(Form parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {
                 instance = new ProvidersView();
 
-                
+                instance.MdiParent = parentContainer;
+
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.Dock = DockStyle.Fill;
             }
 
             else
@@ -103,6 +169,11 @@ namespace Supermarket_mvp1.Views
                 instance.BringToFront();
             }
             return instance;
+        }
+
+        private void TxtProvidersId_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
