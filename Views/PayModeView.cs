@@ -132,11 +132,7 @@ namespace Supermarket_mvp1.Views
             set { isEdit = value; }
         }
 
-        public bool IsSuccessful
-        {
-            get { return isSuccessful; }
-            set { isSuccessful = value; }
-        }
+        
 
         public string Message
         {
@@ -145,7 +141,10 @@ namespace Supermarket_mvp1.Views
 
         }
 
-        public bool IsSuccesful { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsSuccesful {
+            get { return isSuccessful; }
+            set { isSuccessful = value; }
+        }
 
         public event EventHandler SearchEvent;
         public event EventHandler AddNewEvent;
