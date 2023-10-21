@@ -1,4 +1,5 @@
-﻿using Supermarket_mvp._Repositories;
+﻿
+using Supermarket_mvp._Repositories;
 using Supermarket_mvp.Models;
 using Supermarket_mvp.Presenters;
 using Supermarket_mvp.Views;
@@ -24,18 +25,29 @@ namespace Supermarket_mvp1.Presenters
 
             this.mainView.ShowPayModeView += ShowPayModeView;
             this.mainView.ShowProductView += ShowProductView;
+
+            this.mainView.ShowCategoryView += ShowCategoryView;
+            
+
+
+
+        }
+
+        private void ShowCategoryView(object? sender, EventArgs e)
+        {
+
+
+            ICategoryView view = CategoryView.GetInstance((MainView)mainView);
+
+            ICategoryRepository repository = new CategoryRepository(sqlConnectionString);
+            new CategoryPresenter(view, repository);
+
         }
 
         private void ShowProductView(object? sender, EventArgs e)
         {
 
             IProductView view = ProductView.GetInstance((MainView)mainView);
-
-            if (view == null)
-            {
-
-                view = new ProductView();
-            }
 
             IProductRepository repository = new ProductRepository(sqlConnectionString);
             new ProductPresenter(view, repository);
@@ -45,13 +57,6 @@ namespace Supermarket_mvp1.Presenters
         private void ShowPayModeView(object? sender, EventArgs e)
         {
             IPayModeView view = PayModeView.GetInstance((MainView)mainView);
-
-            if (view == null)
-            {
-                
-                view = new PayModeView();
-            }
-
             IPayModeRepository repository = new PayModeRepository(sqlConnectionString);
             new PayModePresenter(view, repository);
 

@@ -21,6 +21,7 @@ namespace Supermarket_mvp1.Views
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPageCategoryDetail);
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -48,7 +49,8 @@ namespace Supermarket_mvp1.Views
 
             set { TxtCategoryObservation.Text = value; }
         }
-        public string SearchValue {
+        public string SearchValue
+        {
             get { return TxtSearch.Text; }
             set { TxtSearch.Text = value; }
         }
@@ -77,7 +79,32 @@ namespace Supermarket_mvp1.Views
 
         public void SetCategoryListBildingSource(BindingSource categoryList)
         {
-            DgCategory.DataSource=categoryList;
+            DgCategory.DataSource = categoryList;
+        }
+
+        private static CategoryView instance;
+
+        public static CategoryView GetInstance(Form parentContainer)
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new CategoryView();
+
+                instance.MdiParent = parentContainer;
+
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.Dock = DockStyle.Fill;
+            }
+
+            else
+            {
+                if (instance.WindowState == FormWindowState.Minimized)
+                {
+                    instance.WindowState = FormWindowState.Normal;
+                }
+                instance.BringToFront();
+            }
+            return instance;
         }
     }
 }

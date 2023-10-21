@@ -10,7 +10,7 @@ namespace Supermarket_mvp1.Models
 {
     internal class CategoryModel
     {
-        [DisplayName("Pay Mode Id")]
+        [DisplayName("  Category  Id")]
         public int Id { get; set; }
 
 
