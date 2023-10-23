@@ -56,7 +56,7 @@ namespace Supermarket_mvp1.Presenters
         {
             var providersMode = new ProvidersModel();
             providersMode.Id = Convert.ToInt32(view.ProvidersId);
-
+            providersMode.Name = view.ProvidersName;
             providersMode.Observation = view.ProvidersObservation;
 
             try
@@ -95,9 +95,9 @@ namespace Supermarket_mvp1.Presenters
         {
             try
             {
-                var payMode = (PayModeModel)providersBindingSource.Current;
+                var providersMode = (ProvidersModel)providersBindingSource.Current;
 
-                repository.Delete(payMode.Id);
+                repository.Delete(providersMode.Id);
                 view.IsSuccesful = true;
                 view.Message = "Providers deleted successfully";
                 LoadAllProvidersList();
@@ -105,7 +105,7 @@ namespace Supermarket_mvp1.Presenters
             catch (Exception ex)
             {
                 view.IsSuccesful = false;
-                view.Message = "An error ocurred, could ot delete providers";
+                view.Message = "An error ocurred, could ot delete category mode";
             }
         }
 
@@ -114,6 +114,7 @@ namespace Supermarket_mvp1.Presenters
             var providersMode = (ProvidersModel)providersBindingSource.Current;
 
             view.ProvidersId = providersMode.Id.ToString();
+            view.ProvidersName = providersMode.Name;
             view.ProvidersObservation = providersMode.Observation;
 
             view.IsEdit = true;

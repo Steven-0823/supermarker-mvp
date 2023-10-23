@@ -53,6 +53,7 @@ namespace Supermarket_mvp.Presenters
 
         private void SavePayMode(object? sender, EventArgs e)
         {
+
             var payMode = new PayModeModel();
             payMode.Id = Convert.ToInt32(view.PayModeId);
             payMode.Name = view.PayModeName;
@@ -60,26 +61,30 @@ namespace Supermarket_mvp.Presenters
 
             try
             {
-                new Common.ModelDataValidation().Validate(payMode);
+                new Supermarket_mvp.Presenters.Common.ModelDataValidation().Validate(payMode);
                 if (view.IsEdit)
                 {
                     repository.Edit(payMode);
-                    view.Message = "PayMode edited successfuly";
+                    view.Message = "Providers edited successfuly";
                 }
                 else
                 {
                     repository.Add(payMode);
-                    view.Message = "PayMode added successfuly";
+                    view.Message = "Providers added successfuly";
                 }
                 view.IsSuccesful = true;
                 LoadAllPayModeList();
                 CleanViewFields();
+
             }
             catch (Exception ex)
             {
                 view.IsSuccesful = false;
                 view.Message = ex.Message;
             }
+
+
+            
         }
 
         private void CleanViewFields()
@@ -97,13 +102,13 @@ namespace Supermarket_mvp.Presenters
 
                 repository.Delete(payMode.Id);
                 view.IsSuccesful = true;
-                view.Message = "Pay Mode deleted successfully";
+                view.Message = "Pay mode deleted successfully";
                 LoadAllPayModeList();
             }
             catch (Exception ex)
             {
                 view.IsSuccesful = false;
-                view.Message = "An error ocurred, could ot delete pay mode";
+                view.Message = "An error ocurred, could ot delete category mode";
             }
         }
 

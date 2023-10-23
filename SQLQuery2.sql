@@ -6,5 +6,5 @@ providers_Name nvarchar (50) not null,
 providers_Observation nvarchar (50) not null,
 )
 go
-insert into Providers values('Colombina', 'Dulces')
-insert into Providers values('Genfar', 'Pastas')
+insert into Providers values('Exito', 'Frutas')
+insert into Providers values('Akt', 'Mots')

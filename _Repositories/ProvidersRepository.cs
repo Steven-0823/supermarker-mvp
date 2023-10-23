@@ -78,7 +78,7 @@ namespace Supermarket_mvp1._Repositories
                     {
                         var providersModel = new ProvidersModel();
                         providersModel.Id = (int)reader["providers_Id"];
-                        //providersModel.Name = reader["providers_Name"].ToString();
+                        providersModel.Name = reader["providers_Name"].ToString();
                         providersModel.Observation = reader["providers_Observation"].ToString();
                         providersModeList.Add(providersModel);
 
