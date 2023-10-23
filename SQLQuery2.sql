@@ -1,10 +1,10 @@
-﻿use Supermarker
-create table PayMode
+﻿use Supermarker 
+create table Providers 
 (
- Pay_Mode_Id int identity (100000,1) primary key,
- Pay_Mode_Name nvarchar (50) not null,
- Pay_Mode_Observation nvarchar (50) not null,
+providers_Id int identity (100000,1) primary key,
+providers_Name nvarchar (50) not null, 
+providers_Observation nvarchar (50) not null,
 )
 go
-insert into PayMode values('Cash', 'Cash mode')
-insert into PayMode values('Credit card', 'Credit card mode')
+insert into Providers values('Colombina', 'Dulces')
+insert into Providers values('Genfar', 'Pastas')

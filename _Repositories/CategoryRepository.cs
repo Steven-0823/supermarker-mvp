@@ -90,27 +90,38 @@ namespace Supermarket_mvp1._Repositories
         {
             var catrgoryList = new List<CategoryModel>();
             int catrgoryId = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
-            string catrgoryName = value;
+            string catrgoryObservation = value;
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand())
             {
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = @"SELECT * FROM Category
-                                        WHEREcategory_Id=@id or category_Observation LIKE @Observation+ '%'
-                                        ORDER By Pay_Mode_Id DESC";
+                                        WHERE category_Id=@id or category_Observation LIKE @observation+ '%'
+                                        ORDER By category_Id DESC";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = catrgoryId;
-                command.Parameters.Add("@name", SqlDbType.NVarChar).Value = catrgoryName;
+                command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = catrgoryObservation;
                 using (var reader = command.ExecuteReader())
                 {
-                    var categoryModel = new CategoryModel();
-                    categoryModel.Id = (int)reader["category_Name"];
-                    categoryModel.observation = reader["category_Observation"].ToString();
-                    catrgoryList.Add(categoryModel);
+                    while (reader.Read())
+                    {
+
+
+                        var categoryModel = new CategoryModel();
+                        categoryModel.Id = (int)reader["category_Id"];
+                        categoryModel.observation = reader["category_Observation"].ToString();
+                        catrgoryList.Add(categoryModel);
+
+
+                    }
+
+
                 }
 
             }
             return catrgoryList;
         }
+        
     }
+
 }

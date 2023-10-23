@@ -50,7 +50,7 @@ namespace Supermarket_mvp1.Presenters
             product.id = Convert.ToInt32(view.ProductModeId);
             product.name = view.ProductModeName;
             product.categority = view.ProductModecategority;
-            product.id = int.Parse(view.ProductModeId);
+            
             try
             {
                 new Supermarket_mvp.Presenters.Common.ModelDataValidation().Validate(product);

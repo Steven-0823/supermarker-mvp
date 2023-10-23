@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             panel1 = new Panel();
+            BtnProviders = new Button();
             BtnCategory = new Button();
             BtnProduct = new Button();
             BtnExit = new Button();
             BtnPayMode = new Button();
             pictureBox1 = new PictureBox();
-            BtnProviders = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -53,6 +53,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 450);
             panel1.TabIndex = 0;
+            // 
+            // BtnProviders
+            // 
+            BtnProviders.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnProviders.BackgroundImage = Properties.Resources.providers;
+            BtnProviders.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnProviders.Location = new Point(3, 229);
+            BtnProviders.Name = "BtnProviders";
+            BtnProviders.Size = new Size(194, 49);
+            BtnProviders.TabIndex = 2;
+            BtnProviders.UseVisualStyleBackColor = true;
             // 
             // BtnCategory
             // 
@@ -108,17 +119,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            // 
-            // BtnProviders
-            // 
-            BtnProviders.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            BtnProviders.BackgroundImage = Properties.Resources.providers;
-            BtnProviders.BackgroundImageLayout = ImageLayout.Zoom;
-            BtnProviders.Location = new Point(3, 229);
-            BtnProviders.Name = "BtnProviders";
-            BtnProviders.Size = new Size(194, 49);
-            BtnProviders.TabIndex = 2;
-            BtnProviders.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
